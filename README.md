@@ -1,7 +1,7 @@
 # BigDataProject
 
-Team Members: 
+<h2>Team Members: </h2>
 
-Vinit Jasolia 
-Priyanshi Shah
-Parita Dhandha
+Vinit Jasolia <br/>
+Priyanshi Shah <br/>
+Parita Dhandha <br/>
