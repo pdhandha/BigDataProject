@@ -7,3 +7,8 @@
 
 <li> Output of col1Stats file </li>
 
+<br>
+
+![col1stats](https://user-images.githubusercontent.com/22376904/33496645-f9a40310-d698-11e7-9ba0-7d5d3cb4107e.jpeg)
+
+
