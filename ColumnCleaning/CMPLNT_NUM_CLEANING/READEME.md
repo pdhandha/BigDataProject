@@ -1,5 +1,9 @@
 <h2> OUTPUT </h2>
 
-<li> Output of col1.out file </li> 
+<li> Sample utput of col1.out file </li> 
+<br></br>
 
-<li> Output of col1Stats fileh </li>
+![col1](https://user-images.githubusercontent.com/22376904/33496644-f996fd8c-d698-11e7-9a62-6a2b4e26f3cc.jpeg)
+
+<li> Output of col1Stats file </li>
+
