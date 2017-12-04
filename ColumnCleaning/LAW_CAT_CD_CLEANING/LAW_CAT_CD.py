@@ -14,7 +14,7 @@ def validity(x):
     if x is "" or x is " ":
         return "NULL"
     else:
-        list_of_crimes=['FELONY',"MISDEMEANOR","VIOLATION"]
+        list_of_crimes=["FELONY","MISDEMEANOR","VIOLATION"]
         x = x.upper()
         if x not in list_of_crimes:
             return "INVALID"
@@ -34,6 +34,6 @@ if __name__ == "__main__":
 
     lines = lines.map(lambda x: (validity(x[11]), 1)).reduceByKey(lambda x, y: x + y).collect()
     lines = sc.parallelize(lines)
-    lines.saveAsTextFile("Col12Stats.out")
+    lines.saveAsTextFile("col12Stats.out")
 
     sc.stop()

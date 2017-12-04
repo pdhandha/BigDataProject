@@ -4,11 +4,13 @@ from csv import reader
 import sys
 import re
 
-def check_datatype(input):
-    if input is "" or input is " ":
+def check_datatype(x):
+    if x is "" or x is " ":
         return "NULL"
+    elif re.match('[0-9]+', x):
+        return type(int.__class__)
     else:
-        return type(input)
+        return type(x)
 
 def validity(x):
 	if x is "" or x is " ":

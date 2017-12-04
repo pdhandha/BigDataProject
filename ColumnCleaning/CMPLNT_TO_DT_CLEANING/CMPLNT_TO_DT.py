@@ -2,35 +2,46 @@ from __future__ import print_function
 from pyspark import SparkContext
 from csv import reader
 import sys
-import re
 import datetime
 
-def check_datatype(input):
-    if input is "" or input is " ":
-        return "NULL"
-    else:
-        return type(input)
+def check_datatype(x):
+    if x is "" or x is " ":
+        return "VALID"
+    else :
+        y=x
+        x=x.split("/")
+        try:
+            year=int(x[2])
+            month=int(x[0])
+            day= int(x[1])
+            try:
+                newDate = datetime.datetime(year,month,day)
+                return type(newDate)
+            except :
+                return type(y)
+        except:
+            return type(y)
 
 def validity(x):
     if x is "" or x is " ":
         return "VALID"
     else :
-            y=x
-            x=x.split("/")
-            try:
-                year=int(x[2])
-                month=int(x[0])
-                day= int(x[1])
-                if year >=2006 and year <=2016 :
-                    try:
-                        newDate = datetime.datetime(year,month,day)
-                        return "VALID"
-                    except :
-                        return "INVALID"
-                else :
+        y=x
+        x=x.split("/")
+        try:
+            year=int(x[2])
+            month=int(x[0])
+            day= int(x[1])
+            if year >= 2006 and year <= 2015:
+                try:
+                    newDate = datetime.datetime(year, month, day)
+                    return "VALID"
+                except:
                     return "INVALID"
-            except:
+            else:
                 return "INVALID"
+        except:
+            return "INVALID"
 
 if __name__ == "__main__":
     sc = SparkContext()
@@ -45,6 +56,6 @@ if __name__ == "__main__":
 
     lines = lines.map(lambda x: (validity(x[3]), 1)).reduceByKey(lambda x, y: x + y).collect()
     lines = sc.parallelize(lines)
-    lines.saveAsTextFile("Col4Stats.out")
+    lines.saveAsTextFile("col4Stats.out")
 
     sc.stop()

@@ -25,10 +25,10 @@ if __name__ == "__main__":
 
     columnData = lines.map(lambda x: (x[0], x[16], check_datatype(x[16]), validity(x[16])))
     #columnData = columnData.filter(lambda x: x[3] == "VALID") #This line is used to filter the data and remove all invalid entries
-    columnData.saveAsTextFile("col16.out")
+    columnData.saveAsTextFile("col17.out")
 
     lines = lines.map(lambda x: (validity(x[16]), 1)).reduceByKey(lambda x, y: x + y).collect()
     lines = sc.parallelize(lines)
-    lines.saveAsTextFile("Col16Stats.out")
+    lines.saveAsTextFile("col17Stats.out")
 
     sc.stop()

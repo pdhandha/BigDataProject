@@ -12,9 +12,9 @@ def check_datatype(input):
 
 def validity(x):
     if x is "" or x is " ":
-        return "NULL"
+        return "VALID"
     else:
-        attempt_list = ['COMPLETED',"ATTEMPTED"]
+        attempt_list = ["COMPLETED","ATTEMPTED"]
         x = x.upper()
         if x not in attempt_list:
             return "INVALID"
@@ -34,6 +34,6 @@ if __name__ == "__main__":
 
     lines = lines.map(lambda x: (validity(x[10]), 1)).reduceByKey(lambda x, y: x + y).collect()
     lines = sc.parallelize(lines)
-    lines.saveAsTextFile("Col11Stats.out")
+    lines.saveAsTextFile("col11Stats.out")
 
     sc.stop()

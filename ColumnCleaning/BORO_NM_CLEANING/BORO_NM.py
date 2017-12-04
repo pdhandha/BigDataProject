@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     def validity(x):
         if x is "" or x is " " :
-            return "NULL"
+            return "INVALID"
         else:
             list_of_boroughs=['BRONX',"BROOKLYN","MANHATTAN","QUEENS","STATEN ISLAND"]
             if x not in list_of_boroughs:
@@ -35,11 +35,11 @@ if __name__ == "__main__":
 
     column13_filtering = lines.map(lambda x: (x[0], x[13], check_datatype(x[13]), validity(x[13])))
     #column13_filtering = column13_filtering.filter(lambda x: x[3] == "VALID") #This line is used to filter the data and remove all invalid entries invalid.
-    column13_filtering.saveAsTextFile("col13.out")
+    column13_filtering.saveAsTextFile("col14.out")
 
     valid_Invalid_Null = lines.map(lambda x: (validity(x[13]), 1)).reduceByKey(lambda x, y: x + y).collect()
     valid_Invalid_Null = sc.parallelize(valid_Invalid_Null)
-    valid_Invalid_Null.saveAsTextFile("col13Stats.out")
+    valid_Invalid_Null.saveAsTextFile("col14Stats.out")
 
 
     sc.stop()

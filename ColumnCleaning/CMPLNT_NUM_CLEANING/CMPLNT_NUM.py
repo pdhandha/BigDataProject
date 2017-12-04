@@ -3,8 +3,6 @@ from __future__ import print_function
 import sys
 import re
 from pyspark import SparkContext
-from pyspark.sql import SQLContext
-from pyspark.sql import Row
 from csv import reader
 
 if __name__ == "__main__":
@@ -14,8 +12,7 @@ if __name__ == "__main__":
 
     lines = lines.mapPartitions(lambda x: reader(x))
 
-
-    def check_NUMBER_datatype(input):
+    def check_datatype(input):
         if input == '':
             return "NULL"
         try:
@@ -25,7 +22,7 @@ if __name__ == "__main__":
             return type(input)
 
 
-    def check_if_valid(x):
+    def validity(x):
         if x == '':
             return "INVALID"
         mat = re.match('[1-9]{1}[0-9]*', x)
@@ -37,7 +34,7 @@ if __name__ == "__main__":
 
     header = lines.first()  # extract header
 
-    lines = lines.filter(lambda x: x != header).map(lambda x: (x[0], check_NUMBER_datatype(x[0]), check_if_valid(x[0])))
+    lines = lines.filter(lambda x: x != header).map(lambda x: (x[0], check_datatype(x[0]), validity(x[0])))
 
     lines.saveAsTextFile("col1.out")
 

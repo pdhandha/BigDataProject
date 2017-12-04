@@ -5,32 +5,41 @@ import sys
 import re
 import datetime
 
-def check_datatype(input):
-    if input is "" or input is " ":
+def check_datatype(x):
+    if x is "" or x is " ":
         return "NULL"
-    else:
-        return type(input)
+    else :
+        y=x
+        x=x.split("/")
+        try:
+            year=int(x[2])
+            month=int(x[0])
+            day= int(x[1])
+            try:
+                newDate = datetime.datetime(year,month,day)
+                return "VALID"
+            except :
+                return "INVALID"
+        except:
+            return "INVALID"
 
 def validity(x):
     if x is "" or x is " ":
         return "NULL"
     else :
-            y=x
-            x=x.split("/")
+        y=x
+        x=x.split("/")
+        try:
+            year=int(x[2])
+            month=int(x[0])
+            day= int(x[1])
             try:
-                year=int(x[2])
-                month=int(x[0])
-                day= int(x[1])
-                if year >=2006 and year <=2016 :
-                    try:
-                        newDate = datetime.datetime(year,month,day)
-                        return "VALID"
-                    except :
-                        return "INVALID"
-                else :
-                    return "INVALID"
-            except:
+                newDate = datetime.datetime(year,month,day)
+                return "VALID"
+            except :
                 return "INVALID"
+        except:
+            return "INVALID"
 
 if __name__ == "__main__":
     sc = SparkContext()

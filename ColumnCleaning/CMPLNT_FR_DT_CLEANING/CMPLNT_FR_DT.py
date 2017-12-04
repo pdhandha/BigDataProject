@@ -41,10 +41,13 @@ if __name__ == "__main__":
                 year = int(x[2])
                 month = int(x[0])
                 day = int(x[1])
-                try:
-                    newDate = datetime.datetime(year, month, day)
-                    return "VALID"
-                except:
+                if year >= 2006 and year <= 2015:
+                    try:
+                        newDate = datetime.datetime(year, month, day)
+                        return "VALID"
+                    except:
+                        return "INVALID"
+                else:
                     return "INVALID"
             except:
                 return "INVALID"

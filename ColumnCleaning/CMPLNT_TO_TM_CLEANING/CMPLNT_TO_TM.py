@@ -2,7 +2,9 @@ from __future__ import print_function
 from pyspark import SparkContext
 from csv import reader
 import sys
+import re
 import datetime
+
 
 def check_datatype(x):
     if x is "" or x is " ":
@@ -26,20 +28,20 @@ def check_datatype(x):
 
 def validity(x):
     if x is "" or x is " ":
-        return "INVALID"
+        return "VALID"
     else :
         x=x.split(":")
         try:
-            hour=int(x[0])
-            minutes=int(x[1])
-            seconds= int(x[2])
+            hour = int(x[0])
+            minutes = int(x[1])
+            seconds = int(x[2])
             if hour == 24 and minutes== 0 and seconds == 0:
-                hour=0
+                hour = 0
             try:
-                    newTime= datetime.time(hour,minutes,seconds)
-                    return "VALID"
+                newTime= datetime.time(hour,minutes,seconds)
+                return "VALID"
             except :
-                    return "INVALID"
+                return "INVALID"
         except:
             return "INVALID"
 
@@ -52,10 +54,10 @@ if __name__ == "__main__":
 
     columnData = lines.map(lambda x: (x[0], x[4], check_datatype(x[4]), validity(x[4])))
     #columnData = columnData.filter(lambda x: x[3] == "VALID") #This line is used to filter the data and remove all
-    columnData.saveAsTextFile("col3.out")
+    columnData.saveAsTextFile("col5.out")
 
-    lines = lines.map(lambda x: (validity(x[2]), 1)).reduceByKey(lambda x, y: x + y).collect()
+    lines = lines.map(lambda x: (validity(x[4]), 1)).reduceByKey(lambda x, y: x + y).collect()
     lines = sc.parallelize(lines)
-    lines.saveAsTextFile("col3Stats.out")
+    lines.saveAsTextFile("col5Stats.out")
 
     sc.stop()
