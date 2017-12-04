@@ -2,9 +2,9 @@ from __future__ import print_function
 
 import sys
 import re
-import string
-from operator import add
 from pyspark import SparkContext
+from pyspark.sql import SQLContext
+from pyspark.sql import Row
 from csv import reader
 
 if __name__ == "__main__":
@@ -15,7 +15,9 @@ if __name__ == "__main__":
     lines = lines.mapPartitions(lambda x: reader(x))
 
 
-    def check_complaintNumber_datatype(input):
+    def check_NUMBER_datatype(input):
+        if input == '':
+            return "NULL"
         try:
             int(input)
             return "INT"
@@ -25,26 +27,24 @@ if __name__ == "__main__":
 
     def check_if_valid(x):
         if x == '':
-            return "NULL"
+            return "INVALID"
         mat = re.match('[1-9]{1}[0-9]*', x)
         if mat is not None:
             return "VALID"
         else:
             return "INVALID"
 
-    header = lines.first()
 
-    lines = lines.filter(lambda x: x != header).map(lambda x: (x[0]))
+    header = lines.first()  # extract header
 
-    intAndOther = lines.map(lambda x: (x,check_complaintNumber_datatype(x))).filter(lambda x: x[1] == "INT")
+    lines = lines.filter(lambda x: x != header).map(lambda x: (x[0], check_NUMBER_datatype(x[0]), check_if_valid(x[0])))
 
-    valid_Invalid_Null = lines.map(lambda x: (check_if_valid(x),1)).reduceByKey(lambda x,y: x+y).collect()
+    lines.saveAsTextFile("col1.out")
 
-    valid_Invalid_Null = sc.parallelize(valid_Invalid_Null);
+    validInvalid = lines.map(lambda x: (x[2], 1)).reduceByKey(lambda x, y: x + y).collect()
 
-    column1 = lines.map(lambda x: (x, check_complaintNumber_datatype(x), check_if_valid(x)))
+    validInvalid = sc.parallelize(validInvalid)
 
-    column1.saveAsTextFile("col1.out")
-    valid_Invalid_Null.saveAsTextFile("col1Stats.out")
+    validInvalid.saveAsTextFile("col1Stats.out")
 
     sc.stop()

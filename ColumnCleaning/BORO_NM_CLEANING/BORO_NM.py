@@ -34,7 +34,7 @@ if __name__ == "__main__":
     lines = lines.filter(lambda x: x != header)
 
     column13_filtering = lines.map(lambda x: (x[0], x[13], check_datatype(x[13]), validity(x[13])))
-    column13_filtering = column13_filtering.filter(lambda x: x[3] == "VALID")
+    #column13_filtering = column13_filtering.filter(lambda x: x[3] == "VALID") #This line is used to filter the data and remove all invalid entries invalid.
     column13_filtering.saveAsTextFile("col13.out")
 
     valid_Invalid_Null = lines.map(lambda x: (validity(x[13]), 1)).reduceByKey(lambda x, y: x + y).collect()
