@@ -47,10 +47,10 @@ if __name__ == "__main__":
 
     columnData = lines.map(lambda x: (x[0], x[23],  check(x[23])))
     #columnData = columnData.filter(lambda x: x[2] == "VALID") #This line is used to remove the identified invalid entires from the column
-    columnData.saveAsTextFile("col23.out")
+    columnData.saveAsTextFile("col24.out")
 
     lines = lines.map(lambda x: (check(x[23]), 1)).reduceByKey(lambda x, y: x + y).collect()
     lines = sc.parallelize(lines)
-    lines.saveAsTextFile("Col23Stast.out")
+    lines.saveAsTextFile("col24Stast.out")
 
     sc.stop()

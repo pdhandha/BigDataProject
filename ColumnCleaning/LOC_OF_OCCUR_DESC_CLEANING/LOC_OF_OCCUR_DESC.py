@@ -34,6 +34,6 @@ if __name__ == "__main__":
 
     lines = lines.map(lambda x: (validity(x[15]), 1)).reduceByKey(lambda x, y: x + y).collect()
     lines = sc.parallelize(lines)
-    lines.saveAsTextFile("Col15Stats.out")
+    lines.saveAsTextFile("Col16Stats.out")
 
     sc.stop()
