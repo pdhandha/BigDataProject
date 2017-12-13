@@ -2,7 +2,6 @@ from __future__ import print_function
 from pyspark import SparkContext
 from csv import reader
 import sys
-import re
 
 
 def check_datatype(input):
