@@ -5,55 +5,62 @@ import sys
 import re
 import datetime
 
+
 def check_datatype(x):
     if x is "" or x is " ":
         return "NULL"
-    else :
-        y=x
-        x=x.split("/")
+    else:
+        y = x
+        x = x.split("/")
         try:
-            year=int(x[2])
-            month=int(x[0])
-            day= int(x[1])
+            year = int(x[2])
+            month = int(x[0])
+            day = int(x[1])
             try:
-                newDate = datetime.datetime(year,month,day)
+                newDate = datetime.datetime(year, month, day)
                 return "VALID"
-            except :
+            except:
                 return "INVALID"
         except:
             return "INVALID"
 
+
 def validity(x):
     if x is "" or x is " ":
-        return "NULL"
-    else :
-        y=x
-        x=x.split("/")
+        return False
+    else:
+        y = x
+        x = x.split("/")
         try:
-            year=int(x[2])
-            month=int(x[0])
-            day= int(x[1])
+            year = int(x[2])
+            month = int(x[0])
+            day = int(x[1])
             try:
-                newDate = datetime.datetime(year,month,day)
-                return "VALID"
-            except :
-                return "INVALID"
+                datetime.datetime(year, month, day)
+                return True
+            except:
+                return False
         except:
-            return "INVALID"
+            return False
+
+
+def clean_invalid_data(header, data):
+    filtered_data = data.filter(lambda x: (x == header) or (validity(x[5])))
+    return filtered_data
+
+
+def toCSVLine(data):
+    return ','.join(data)
+
 
 if __name__ == "__main__":
     sc = SparkContext()
     lines = sc.textFile(sys.argv[1], 1)
     lines = lines.mapPartitions(lambda x: reader(x))
-    header = lines.first()
-    lines = lines.filter(lambda x: x != header)
+    header = lines.first()  # extract header
 
-    columnData = lines.map(lambda x: (x[0], x[5], check_datatype(x[5]), validity(x[5])))
-    #columnData = columnData.filter(lambda x: x[3] == "VALID") #This line is used to filter the data and remove all invalid entries
-    columnData.saveAsTextFile("col6.out")
-
-    lines = lines.map(lambda x: (validity(x[5]), 1)).reduceByKey(lambda x, y: x + y).collect()
-    lines = sc.parallelize(lines)
-    lines.saveAsTextFile("col6Stats.out")
+    lines = clean_invalid_data(header, lines)
+    lines = lines.map(toCSVLine)
+    lines.saveAsTextFile("crime_clean.csv")
 
     sc.stop()
