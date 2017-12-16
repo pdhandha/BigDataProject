@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
     lines = clean_invalid_data(header, lines)
     lines = lines.map(toCSVLine)
-    lines.saveAsTextFile("crime_clean.csv")
+    lines.saveAsTextFile("crime_clean.out")
     # header = lines.first()
     # lines = lines.filter(lambda x: x != header)
     #

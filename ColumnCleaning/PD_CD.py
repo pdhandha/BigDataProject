@@ -14,7 +14,7 @@ def check_datatype(x):
 
 def validity(x):
 	if x is "" or x is " ":
-		return False
+		return True
 	elif re.match('[0-9]+',x):
 		return True
 	else :
@@ -35,6 +35,6 @@ if __name__ == "__main__":
     header = lines.first()  # extract header
     lines = clean_invalid_data(header, lines)
     lines = lines.map(toCSVLine)
-    lines.saveAsTextFile("crime_clean.csv")
+    lines.saveAsTextFile("crime_clean.out")
 
     sc.stop()
