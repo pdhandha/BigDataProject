@@ -1,7 +1,0 @@
-.idea/
-BigDataProject.iml
-.gitignore
-.DS_Store
-ColumnCleaning/.DS_Store
-ColumnCleaning/crime_part.csv
-venv
