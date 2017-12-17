@@ -44,7 +44,7 @@ def validity(x):
             return False
 
 def clean_invalid_data(header, data):
-    filtered_data = data.filter(lambda x: (x == header) or (validity(x[4])))
+    filtered_data = data.filter(lambda x: (x == header) or (validity(x[2])))
     return filtered_data
 
 
