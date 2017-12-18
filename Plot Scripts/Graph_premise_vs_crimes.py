@@ -2,7 +2,6 @@ import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
-#file = open("/Users/priyanshishah/Desktop/MY DESKTOP/NYU/fall17/assignments/BDA/BigDataProject/Graph scripts/premises_desc.out/part-00000","r")
 file = open("../Spark Scripts/premises_desc.out/part-00000","r")
 
 plt.interactive(False)
