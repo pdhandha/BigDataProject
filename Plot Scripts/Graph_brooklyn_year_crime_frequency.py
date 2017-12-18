@@ -14,14 +14,14 @@ print(no_of_crime)
 year.sort()
 print(year)
 num=range(1, len(year) + 1)
-
+# ,linestyle='dashed',linewidth=5
 plt.rcParams.update({'font.size': 9})
-plt.bar(num, no_of_crime, align='center', alpha=0.5, color = 'r')
+plt.plot(num, no_of_crime, color = 'g',marker='o',markerfacecolor='blue',markersize=15)
 
 plt.xticks(num, year, rotation ="vertical")
 
 # setting x and y axis range
-plt.ylim(0,  max(no_of_crime)+10)
+plt.ylim(min(no_of_crime)-1000,  max(no_of_crime)+1000)
 plt.xlim(0, max(num)+1)
 
 # naming the x axis

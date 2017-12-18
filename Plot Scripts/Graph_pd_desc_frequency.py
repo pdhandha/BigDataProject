@@ -19,19 +19,19 @@ plt.bar(num, no_of_crime, align='center', alpha=0.5, color = 'r')
 
 plt.xticks(num, pd_desc, rotation ="vertical")
 
-plt.gcf().subplots_adjust(bottom = 0.6)
+plt.gcf().subplots_adjust(bottom = 0.2)
 
 # setting x and y axis range
-plt.ylim(0,  max(no_of_crime)+10)
+plt.ylim(0,  max(no_of_crime)+1000)
 plt.xlim(0, max(num)+1)
 
 # naming the x axis
-plt.xlabel('PD Description')
+plt.xlabel('PD Code')
 # naming the y axis
 plt.ylabel('Number of Crimes')
 
 # giving a title to my graph
-plt.title('Offense frequency')
+plt.title('PD Code vs Crime frequency')
 
 plt.grid()
 # function to show the plot

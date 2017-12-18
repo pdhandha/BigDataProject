@@ -20,10 +20,10 @@ plt.bar(num, no_of_crime, align='center', alpha=0.5, color = 'r')
 
 plt.xticks(num, hour_of_day, rotation ="vertical")
 
-plt.gcf().subplots_adjust(bottom = 0.6)
+plt.gcf().subplots_adjust(bottom = 0.3)
 
 # setting x and y axis range
-plt.ylim(0,  max(no_of_crime)+10)
+plt.ylim(0,  max(no_of_crime)+1000)
 plt.xlim(0, max(num)+1)
 
 # naming the x axis

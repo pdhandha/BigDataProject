@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     lines = lines.filter(lambda x: x != header)
 
-    valid_Invalid_Null = lines.map(lambda x: (validity(x[9]), 1)).reduceByKey(lambda x, y: x + y)
+    valid_Invalid_Null = lines.map(lambda x: (validity(x[8]), 1)).reduceByKey(lambda x, y: x + y)
 
     valid_Invalid_Null = valid_Invalid_Null.filter(lambda x: x[0] != "INVALID")
 

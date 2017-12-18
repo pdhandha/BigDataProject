@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-file = open("crimes_per_borough.out/part-00000","r")
+file = open("../Spark Scripts/crimes_per_borough.out/part-00000","r")
 
 num = [1, 2, 3, 4, 5]
 LABELS = ["Bronx", "Brooklyn", "Staten Island", "Manhattan", "Queens"]
@@ -23,7 +23,7 @@ plt.bar(num, no_of_crime, align='center', alpha=0.5)
 plt.xticks(num, broughs)
 
 # setting x and y axis range
-plt.ylim(0,  max(no_of_crime)+50)
+plt.ylim(0,  max(no_of_crime)+100000)
 plt.xlim(0, 6)
 
 # naming the x axis
