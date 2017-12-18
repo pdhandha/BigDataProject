@@ -22,6 +22,7 @@ if __name__ == "__main__":
     lines = lines.filter(lambda x: x != header)
     # lines = lines.filter(lambda x: (str(x[13]) == "BROOKLYN"))
 
+
     valid_Invalid_Null = lines.map(lambda x: (validity(x[11]), 1)).reduceByKey(lambda x, y: x + y)
 
     valid_Invalid_Null = valid_Invalid_Null.filter(lambda x: x[0] != "INVALID")
