@@ -13,8 +13,7 @@ The data can be found here : [NYC Crime Data](https://data.cityofnewyork.us/Publ
 The report can be found here: [Report Of NYC Crime Data](https://github.com/pdhandha/BigDataProject/blob/master/Project%20Report.pdf)
 
 <h2>Subdirectories: </h2>
--CleaningScripts This directory contains scripts to find dataquality issues in each of the columns in the dataset and generates a file for each column indicating the number of valid, invalid and null.
-
+-CleaningScripts This directory contains scripts to find dataquality issues in each of the columns in the dataset and generates a file for each column indicating the number of valid, invalid and null. <br>
 
 -Spark Scripts This directory contains scripts used to extract information from the large dataset and helps summarize the data.
 
